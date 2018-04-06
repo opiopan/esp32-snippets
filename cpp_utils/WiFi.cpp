@@ -182,6 +182,8 @@ bool WiFi::connectAP(const std::string& ssid, const std::string& password, bool 
 	::memcpy(sta_config.sta.ssid, ssid.data(), ssid.size());
 	::memcpy(sta_config.sta.password, password.data(), password.size());
 	sta_config.sta.bssid_set = 0;
+        sta_config.sta.scan_method = WIFI_ALL_CHANNEL_SCAN;
+	sta_config.sta.sort_method = WIFI_CONNECT_AP_BY_SIGNAL;;
 	errRc = ::esp_wifi_set_config(WIFI_IF_STA, &sta_config);
 	if (errRc != ESP_OK) {
 		ESP_LOGE(LOG_TAG, "esp_wifi_set_config: rc=%d %s", errRc, GeneralUtils::errorToString(errRc));
